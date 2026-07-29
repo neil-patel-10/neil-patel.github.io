@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Neil Patel — Mechanical Design Engineer</title>
+<meta name="description" content="Portfolio of Neil Patel — mechanical design engineer working across CAD, CFD/FEA simulation, and hands-on manufacturing." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a10;
+    --surface:#131220;
+    --surface-2:#191830;
+    --line:#2a2740;
+    --violet:#9b6dff;
+    --violet-soft:#c9b6ff;
+    --blue:#4fa8ff;
+    --red:#ff5a5f;
+    --ink:#f2effa;
+    --muted:#9791ac;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif; margin:0; letter-spacing:-0.01em;}
+  a{color:inherit;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  /* corner registration marks */
+  .reg{position:fixed; width:22px; height:22px; z-index:40; pointer-events:none; opacity:0.55;}
+  .reg::before,.reg::after{content:""; position:absolute; background:var(--violet);}
+  .reg::before{width:100%; height:1px; top:50%; left:0;}
+  .reg::after{width:1px; height:100%; left:50%; top:0;}
+  .reg.tl{top:14px; left:14px;} .reg.tr{top:14px; right:14px;}
+  .reg.bl{bottom:14px; left:14px;} .reg.br{bottom:14px; right:14px;}
+
+  /* nav */
+  nav{
+    position:sticky; top:0; z-index:30;
+    background:rgba(10,10,16,0.82); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:60px;}
+  .brand{font-family:'Space Grotesk'; font-weight:600; font-size:17px; letter-spacing:0.02em;}
+  .brand span{color:var(--violet);}
+  .navlinks{display:flex; gap:26px; list-style:none; margin:0; padding:0;}
+  .navlinks a{
+    font-family:'JetBrains Mono'; font-size:12.5px; text-decoration:none; color:var(--muted);
+    letter-spacing:0.03em; transition:color .15s ease;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--violet-soft);}
+  .navlinks{ }
+  @media (max-width:640px){ .navlinks{gap:16px;} .navlinks a{font-size:11px;} }
+
+  a:focus-visible, button:focus-visible{outline:2px solid var(--violet-soft); outline-offset:3px; border-radius:2px;}
+
+  .eyebrow{
+    font-family:'JetBrains Mono'; font-size:12.5px; color:var(--violet-soft);
+    display:flex; align-items:center; gap:10px; margin-bottom:14px; letter-spacing:0.02em;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--violet); display:inline-block;}
+
+  /* hero */
+  .hero{padding:120px 0 90px; background:
+      radial-gradient(ellipse 70% 55% at 18% -10%, rgba(155,109,255,0.16), transparent 60%),
+      radial-gradient(ellipse 55% 45% at 100% 0%, rgba(79,168,255,0.10), transparent 60%);
+  }
+  .hero h1{font-size:clamp(40px,7vw,64px); font-weight:700;}
+  .hero h1 .last{color:var(--violet);}
+  .role{font-size:clamp(16px,2.4vw,20px); color:var(--violet-soft); margin-top:10px; font-weight:500;}
+  .lede{max-width:600px; color:var(--muted); margin-top:20px; font-size:16px;}
+  .hero-cta{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono'; font-size:13px; padding:12px 20px; border-radius:3px;
+    text-decoration:none; letter-spacing:0.02em; transition:transform .15s ease, border-color .15s ease, background .15s ease;
+    display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line);
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-solid{background:var(--violet); color:#0a0a10; border-color:var(--violet); font-weight:500;}
+  .btn-solid:hover{background:var(--violet-soft);}
+  .btn-outline{color:var(--ink); border-color:var(--line);}
+  .btn-outline:hover{border-color:var(--violet);}
+  button.btn{background:transparent; -webkit-appearance:none; -moz-appearance:none; appearance:none; cursor:pointer; font:inherit;}
+
+  .stats{display:flex; gap:44px; margin-top:56px; flex-wrap:wrap;}
+  .stat b{display:block; font-family:'Space Grotesk'; font-size:28px; color:var(--ink);}
+  .stat span{font-family:'JetBrains Mono'; font-size:11.5px; color:var(--muted); letter-spacing:0.02em;}
+
+  section{padding:78px 0; border-top:1px solid var(--line);}
+  .section-head{margin-bottom:40px;}
+  .section-head h2{font-size:clamp(24px,3.4vw,32px);}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* about */
+  .about-body{max-width:680px; color:var(--muted); font-size:16.5px;}
+  .about-body strong{color:var(--ink); font-weight:600;}
+
+  /* project cards */
+  .project{
+    border:1px solid var(--line); border-radius:6px; background:var(--surface);
+    padding:30px 30px 26px; margin-bottom:20px; position:relative; overflow:hidden;
+  }
+  .project::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--violet); opacity:0.7;
+  }
+  .project.thesis::before{background:var(--blue);}
+  .p-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;}
+  .p-title{font-size:19px; font-weight:600;}
+  .p-meta{font-family:'JetBrains Mono'; font-size:12px; color:var(--muted); margin-top:6px;}
+  .status{
+    font-family:'JetBrains Mono'; font-size:11px; padding:4px 10px; border-radius:20px;
+    border:1px solid var(--red); color:var(--red); white-space:nowrap; letter-spacing:0.03em;
+  }
+  .status.done{border-color:var(--violet-soft); color:var(--violet-soft);}
+  .p-desc{color:var(--muted); margin-top:16px; font-size:15px; max-width:680px;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px;}
+  .tag{
+    font-family:'JetBrains Mono'; font-size:11.5px; color:var(--blue); border:1px solid rgba(79,168,255,0.35);
+    background:rgba(79,168,255,0.07); padding:4px 10px; border-radius:3px;
+  }
+  .thesis .tag{color:var(--violet-soft); border-color:rgba(155,109,255,0.4); background:rgba(155,109,255,0.08);}
+
+  .project-compact{border:1px dashed var(--line); border-radius:6px; padding:22px 26px; margin-top:8px;}
+  .project-compact h3{font-size:14px; font-family:'JetBrains Mono'; color:var(--violet-soft); font-weight:500; margin-bottom:14px;}
+  .project-compact ul{margin:0; padding:0; list-style:none;}
+  .project-compact li{color:var(--muted); font-size:14.5px; padding:8px 0; border-top:1px solid var(--line);}
+  .project-compact li:first-child{border-top:none;}
+  .project-compact li b{color:var(--ink); font-weight:500;}
+
+  /* skills */
+  .skill-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:22px;}
+  .skill-group h3{font-family:'JetBrains Mono'; font-size:12.5px; color:var(--violet-soft); font-weight:500; margin-bottom:12px; letter-spacing:0.02em;}
+  .skill-group .tags .tag{color:var(--ink); border-color:var(--line); background:var(--surface);}
+
+  /* experience / education */
+  .xp-item{display:flex; gap:22px; margin-bottom:26px;}
+  .xp-date{font-family:'JetBrains Mono'; font-size:12px; color:var(--muted); min-width:140px; padding-top:3px;}
+  .xp-body b{font-size:16px;}
+  .xp-body .role{color:var(--violet-soft); font-size:14px; margin:2px 0 8px; display:block;}
+  .xp-body ul{margin:6px 0 0; padding-left:18px; color:var(--muted); font-size:14.5px;}
+  .xp-body li{margin-bottom:5px;}
+  @media (max-width:640px){ .xp-item{flex-direction:column; gap:6px;} .xp-date{min-width:auto;} }
+
+  .edu-card{
+    position:relative; display:flex; gap:22px; align-items:flex-start;
+    border:1px solid var(--line); border-radius:6px; background:var(--surface);
+    padding:22px 70px 26px 26px; margin-bottom:16px;
+  }
+  .degree-badge{
+    position:absolute; right:20px; bottom:14px; font-family:'JetBrains Mono'; font-weight:700;
+    font-size:26px; color:var(--violet); opacity:0.4; letter-spacing:0.01em; line-height:1;
+  }
+  @media (max-width:640px){ .edu-card{flex-direction:column; gap:6px; padding:20px 60px 24px 20px;} }
+
+  /* contact */
+  .contact-box{
+    border:1px solid var(--line); border-radius:6px; padding:40px; background:
+      linear-gradient(135deg, rgba(155,109,255,0.07), rgba(79,168,255,0.05));
+  }
+  .contact-actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:26px;}
+  .copy-note{font-family:'JetBrains Mono'; font-size:12px; color:var(--muted); margin-top:12px;}
+  .copy-note.show{color:var(--violet-soft);}
+
+  footer{border-top:1px solid var(--line); padding:30px 0 50px;}
+  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  .titleblock{font-family:'JetBrains Mono'; font-size:11px; color:var(--muted); letter-spacing:0.03em;}
+  .titleblock b{color:var(--violet-soft);}
+
+  svg.icon{width:16px; height:16px; flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<div class="reg tl"></div><div class="reg tr"></div><div class="reg bl"></div><div class="reg br"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">NEIL <span>PATEL</span></div>
+    <ul class="navlinks">
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#projects">PROJECTS</a></li>
+      <li><a href="#skills">SKILLS</a></li>
+      <li><a href="#experience">EXPERIENCE</a></li>
+      <li><a href="#education">EDUCATION</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Neil <span class="last">Patel</span></h1>
+    <div class="role">Mechanical Design Engineer — CAD · CFD/FEA Simulation · Manufacturing</div>
+    <p class="lede">MSME candidate at San José State University (Design &amp; Manufacturing), building surrogate-model-driven optimization pipelines by day and hands-on hardware by night — one prototype at a time.</p>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#projects">View Projects</a>
+      <a class="btn btn-outline" href="#contact">Get in Touch</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>8+</b><span>CAD &amp; SIM TOOLS</span></div>
+      <div class="stat"><b>2</b><span>ENGINEERING DEGREES</span></div>
+      <div class="stat"><b>25+</b><span>CFD DESIGN POINTS</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">Profile</div>
+    <div class="section-head reveal"><h2>About</h2></div>
+    <p class="about-body reveal">I'm a mechanical engineer who likes to carry an idea the whole way — from a CAD sketch, through simulation, to something that actually runs. My graduate work sits at the intersection of <strong>CFD, machine learning, and optimization</strong>; outside of that I've built everything from a self-heating travel mug to a 3D-printed wind turbine that recharges batteries on a breezeway. I currently work full-time managing operations at a 90-room property while finishing my degree, so I've gotten good at moving fast without cutting corners.</p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">Work</div>
+    <div class="section-head reveal"><h2>Projects</h2></div>
+
+    <div class="project thesis reveal">
+      <div class="p-top">
+        <div>
+          <div class="p-title">Surrogate-Optimized EV Battery Cooling Channel Geometry</div>
+          <div class="p-meta">M.S. THESIS · SAN JOSÉ STATE UNIVERSITY</div>
+        </div>
+        <div class="status">IN PROGRESS</div>
+      </div>
+      <p class="p-desc">Running a Latin hypercube-sampled sweep of steady-state conjugate heat transfer simulations across channel width, height, and mass flow rate on a battery liquid-cooling unit cell. Training a neural network surrogate (target R² ≥ 0.95) to stand in for the CFD, then using NSGA-II to trace a Pareto front trading off maximum cell-wall temperature against coolant pressure drop.</p>
+      <div class="tags">
+        <span class="tag">ANSYS Fluent</span><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">NSGA-II</span>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div class="p-top">
+        <div>
+          <div class="p-title">Portable Self-Heating Travel Mug</div>
+          <div class="p-meta">SENIOR DESIGN PROJECT · ENGR 696/697 (SFSU) · ME 256 (SJSU) · JAN–DEC 2023</div>
+        </div>
+        <div class="status done">6TH PLACE</div>
+      </div>
+      <p class="p-desc">Led design and development of a mug that holds beverage temperature for roughly three hours, applying thermodynamics, fluid dynamics, and material selection. Iterated through fabrication and material constraints with a cross-functional team, maintaining a full bill of materials — item numbers, catalog/part numbers, quantities, and purchased components — across every revision.</p>
+      <div class="tags">
+        <span class="tag">SolidWorks</span><span class="tag">Thermodynamics</span><span class="tag">DFM</span><span class="tag">BOM</span>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div class="p-top">
+        <div>
+          <div class="p-title">3D-Printed Vertical-Axis Wind Turbine</div>
+          <div class="p-meta">PERSONAL PROJECT · KING CITY, CA · JAN 2025</div>
+        </div>
+      </div>
+      <p class="p-desc">Built a small turbine to solve a real problem: constant AA battery replacement in an electronic door lock. Sized the generator and drivetrain to match expected rotational speed and torque, applying renewable-energy concepts from undergraduate coursework to a live deployment on a breezeway.</p>
+      <div class="tags">
+        <span class="tag">SolidWorks</span><span class="tag">3D Printing</span><span class="tag">ENGR 469</span><span class="tag">Renewable Energy</span>
+      </div>
+    </div>
+
+    <div class="project-compact reveal">
+      <h3>// ADDITIONAL SIMULATION COURSEWORK</h3>
+      <ul>
+        <li><b>Structural FEA in ANSYS Workbench</b> — ME 273: Finite Element Methods in Engineering. Meshing, boundary conditions, and load cases to evaluate stress and deformation.</li>
+        <li><b>Hemodynamics CFD in COMSOL Multiphysics</b> — ME 267: Engineering Biomechanics. 2D axisymmetric pulsatile (Womersley) blood flow, comparing velocity and wall shear stress profiles.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">Capabilities</div>
+    <div class="section-head reveal"><h2>Skills &amp; Tools</h2></div>
+    <div class="skill-grid reveal">
+      <div class="skill-group">
+        <h3>DESIGN &amp; CAD</h3>
+        <div class="tags"><span class="tag">SolidWorks</span><span class="tag">AutoCAD</span><span class="tag">Fusion 360</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>SIMULATION</h3>
+        <div class="tags"><span class="tag">ANSYS Fluent</span><span class="tag">ANSYS Workbench</span><span class="tag">COMSOL</span><span class="tag">MATLAB</span><span class="tag">Simulink</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>PROGRAMMING</h3>
+        <div class="tags"><span class="tag">Python</span><span class="tag">MATLAB</span><span class="tag">C++</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>MANUFACTURING</h3>
+        <div class="tags"><span class="tag">3D Printing</span><span class="tag">Welding</span><span class="tag">Electrical Wiring</span><span class="tag">Plumbing</span><span class="tag">DFM</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>QUALITY &amp; DOCUMENTATION</h3>
+        <div class="tags"><span class="tag">BOM Development</span><span class="tag">GD&amp;T</span><span class="tag">FMEA</span><span class="tag">8D</span><span class="tag">SPC</span><span class="tag">ISO 9001</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>LANGUAGES</h3>
+        <div class="tags"><span class="tag">English</span><span class="tag">Gujarati</span><span class="tag">Hindi</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">Background</div>
+    <div class="section-head reveal"><h2>Experience</h2></div>
+
+    <div class="xp-item reveal">
+      <div class="xp-date">NOV 2022 — PRESENT</div>
+      <div class="xp-body">
+        <b>Motel 6 King City</b> <span class="role">Supervisor · King City, CA</span>
+        <ul>
+          <li>Reviewed guest feedback and implemented process improvements, increasing positive reviews by ~30%</li>
+          <li>Supervised daily operations, staff scheduling, and customer service for a 90+ room property</li>
+          <li>Coordinated maintenance, inventory, and cost-control processes to keep operations on budget and on schedule</li>
+          <li>Resolved system-wide reservation-platform issues by coordinating directly with external partners</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="xp-item reveal">
+      <div class="xp-date">DEC 2020 — OCT 2022</div>
+      <div class="xp-body">
+        <b>Motel 6 King City</b> <span class="role">Desk Clerk / Guest Service Representative · King City, CA</span>
+        <ul>
+          <li>Managed guest check-in/check-out, reservations, and nightly audit reports with attention to detail</li>
+          <li>Maintained compliance with operational and safety procedures</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="eyebrow">Academic</div>
+    <div class="section-head reveal"><h2>Education</h2></div>
+
+    <div class="edu-card reveal">
+      <div class="xp-date">EXPECTED MAY 2027</div>
+      <div class="xp-body">
+        <b>San José State University</b>
+        <span class="role">Mechanical Engineering — Design &amp; Manufacturing</span>
+      </div>
+      <div class="degree-badge">MS</div>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="xp-date">DEC 2023</div>
+      <div class="xp-body">
+        <b>San Francisco State University</b>
+        <span class="role">Mechanical Engineering</span>
+      </div>
+      <div class="degree-badge">BS</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">~/contact</div>
+    <div class="section-head reveal"><h2>Get in Touch</h2></div>
+    <div class="contact-box reveal">
+      <p style="color:var(--muted); margin:0; max-width:520px;">Open to internships, research collaborations, and mechanical design opportunities. Best reached by email.</p>
+      <div class="contact-actions">
+        <a class="btn btn-solid" href="mailto:patelneil10@gmail.com" id="email-btn">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg>
+          patelneil10@gmail.com
+        </a>
+        <button class="btn btn-outline" id="copy-btn" type="button">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="1"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
+          Copy email
+        </button>
+        <a class="btn btn-outline" href="https://linkedin.com/in/neil-patel-135bb2218" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.9 3.9 6 2.5 6S0 4.9 0 3.5 1.1 1 2.5 1 4.98 2.1 4.98 3.5zM.5 8h4V23h-4V8zM8.5 8h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V23h-4V8z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn btn-outline" href="https://github.com/patelneil10-hub" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55v-2.13c-3.2.7-3.87-1.42-3.87-1.42-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.78 2.72 1.26 3.38.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.44-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.7 5.38-5.26 5.67.41.36.78 1.08.78 2.17v3.21c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div class="copy-note" id="copy-note">Click "Copy email" to copy it to your clipboard.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="titleblock">SHEET <b>1/1</b> &nbsp;·&nbsp; NEIL PATEL &nbsp;·&nbsp; KING CITY, CA</div>
+    <div class="titleblock">REV <b id="rev-date"></b></div>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
+
+  // copy email
+  const copyBtn = document.getElementById('copy-btn');
+  const copyNote = document.getElementById('copy-note');
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText('patelneil10@gmail.com');
+      copyNote.textContent = 'Copied — patelneil10@gmail.com';
+      copyNote.classList.add('show');
+    } catch (e) {
+      copyNote.textContent = 'patelneil10@gmail.com';
+    }
+  });
+
+  // footer rev date
+  document.getElementById('rev-date').textContent = new Date().toISOString().slice(0,7).replace('-','.');
+</script>
+
+</body>
+</html>
